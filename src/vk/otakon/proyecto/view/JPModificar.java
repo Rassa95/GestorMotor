@@ -25,6 +25,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+/**
+ * Clase JPanel da la funcionalidad de modificar un modelo de la base de datos.
+ * 
+ * @author David.Plaza
+ *
+ */
 public class JPModificar extends JPanel {
 
 	protected JTextField tfModelo;
@@ -39,12 +45,12 @@ public class JPModificar extends JPanel {
 	protected ArrayList<CalificacionEnergetica> calificaciones;
 	protected Modelo model = new Modelo();
 	private GestorBBDD gb;
-	protected JPConsulta2 search;
+	protected JPConsulta search;
 
 	/**
 	 * Create the panel.
 	 */
-	public JPModificar(JPConsulta2 busqueda, GestorBBDD gb, JFMain principal) {
+	public JPModificar(JPConsulta busqueda, GestorBBDD gb, JFMain principal) {
 		this.gb = gb;
 		this.search = busqueda;
 
@@ -159,6 +165,10 @@ public class JPModificar extends JPanel {
 		cargarDatos();
 	}
 
+	/**
+	 * Método que carga todos los datos recogidos, los pone en un objeto modelo y luego hace un UPDATE en la base 
+	 * de datos buscando por el ID del modelo.
+	 */
 	public void editarModelo() {
 
 		if (tfModelo.getText().trim().equalsIgnoreCase("")) {
@@ -194,6 +204,9 @@ public class JPModificar extends JPanel {
 
 	}
 
+	/**
+	 * Método para cargar los datos de los Combo Box en memoria.
+	 */
 	public void cargarDatos() {
 		try {
 			marcas = gb.cargarMarcas();

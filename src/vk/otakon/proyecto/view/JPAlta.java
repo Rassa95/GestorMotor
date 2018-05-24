@@ -33,6 +33,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 
+/**
+ * Clase JPanel que permite crear un nuevo modelo y añadirlo a la base de datos.
+ * 
+ * @author David.Plaza
+ *
+ */
 public class JPAlta extends JPanel {
 
 	private JTextField tfModelo;
@@ -154,7 +160,7 @@ public class JPAlta extends JPanel {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				principal.cambiarPantalla("pConsulta2");
+				principal.cambiarPantalla("pConsulta");
 			}
 		});
 
@@ -168,7 +174,10 @@ public class JPAlta extends JPanel {
 		cargarDatos();
 
 	}
-
+	
+	/**
+	 * Método para cargar los datos de los Combo Box en memoria.
+	 */
 	private void cargarDatos() {
 
 		try {
@@ -188,6 +197,9 @@ public class JPAlta extends JPanel {
 		}
 	}
 
+	/**
+	 * Método que crea un objeto modelo con los datos recogidos y lo añade a la base de datos.
+	 */
 	private void guardarModelo() {
 
 		int posicion = cbMarcas.getSelectedIndex();

@@ -32,7 +32,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.SoftBevelBorder;
 
-public class JPConsulta2 extends JPanel {
+/**
+ * Clase JPanel donde se realizan y muestran las consultas de los modelos.
+ * 
+ * @author David.Plaza
+ *
+ */
+public class JPConsulta extends JPanel {
 
 	protected GestorBBDD gb;
 	protected ResultSet rs;
@@ -56,7 +62,7 @@ public class JPConsulta2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPConsulta2(GestorBBDD gb, JFMain principal, JPModificar jpModi) {
+	public JPConsulta(GestorBBDD gb, JFMain principal, JPModificar jpModi) {
 
 		this.jpModi = jpModi;
 		this.principal = principal;
@@ -125,7 +131,7 @@ public class JPConsulta2 extends JPanel {
 		slEmisiones.setMajorTickSpacing(1000);
 		slEmisiones.setValue(0);
 		slEmisiones.setMaximum(5000);
-		
+
 		slEmisiones.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				DecimalFormat f1 = new DecimalFormat("#.00");
@@ -152,15 +158,15 @@ public class JPConsulta2 extends JPanel {
 
 		JButton btnBorrar = new JButton("");
 		btnBorrar.setToolTipText("Borrar seleccionado");
-		btnBorrar.setIcon(new ImageIcon(JPConsulta2.class.getResource("/img/64/basura.png")));
+		btnBorrar.setIcon(new ImageIcon(JPConsulta.class.getResource("/img/64/basura.png")));
 
 		JButton btnEditar = new JButton("");
 		btnEditar.setToolTipText("Editar seleccionado");
-		btnEditar.setIcon(new ImageIcon(JPConsulta2.class.getResource("/img/64/editar.png")));
+		btnEditar.setIcon(new ImageIcon(JPConsulta.class.getResource("/img/64/editar.png")));
 
 		JButton btnFiltrar = new JButton("");
 		btnFiltrar.setToolTipText("Aplicar Filtro");
-		btnFiltrar.setIcon(new ImageIcon(JPConsulta2.class.getResource("/img/64/filtrar.png")));
+		btnFiltrar.setIcon(new ImageIcon(JPConsulta.class.getResource("/img/64/filtrar.png")));
 		toolBar.add(btnFiltrar);
 		toolBar.add(btnEditar);
 		toolBar.add(btnBorrar);
@@ -201,10 +207,16 @@ public class JPConsulta2 extends JPanel {
 
 		cargarDatosFiltros();
 
-		//Peta y no deja editar si lo dejo puesto
-		//buscarTodos();
+		// Peta y no deja editar si lo dejo puesto
+		// buscarTodos();
 	}
 
+	/**
+	 * Método para hacer la confirmación para borrar un modelo de la base de datos.
+	 * 
+	 * @param modelo a borrar.
+	 * @return boolean con la confirmación
+	 */
 	public boolean getConfirmacion(String modelo) {
 
 		int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas borrar el modelo " + modelo + "?", "Gestormotor",
@@ -217,6 +229,9 @@ public class JPConsulta2 extends JPanel {
 		}
 	}
 
+	/**
+	 * Método para cargar los datos de los Combo Box en memoria.
+	 */
 	public void cargarDatosFiltros() {
 
 		try {
@@ -237,10 +252,13 @@ public class JPConsulta2 extends JPanel {
 
 	}
 
+	/**
+	 * Método para cargar y mostrar todos los modelos de la base de datos.
+	 */
 	public void buscarTodos() {
 
 		try {
-			ModelosTableModel mtm = new ModelosTableModel(gb.consultarBBDD()); 
+			ModelosTableModel mtm = new ModelosTableModel(gb.consultarBBDD());
 			table.setModel(mtm);
 		} catch (SQLException e1) {
 
@@ -250,6 +268,9 @@ public class JPConsulta2 extends JPanel {
 
 	}
 
+	/**
+	 * Método para hacer una consulta y ver los resultados a la base de datos pero aplicando el filtro seleccionado.
+	 */
 	public void aplicarFiltro() {
 		if (bConsumo.isSelected()) {
 			try {
@@ -308,6 +329,9 @@ public class JPConsulta2 extends JPanel {
 
 	}
 
+	/**
+	 * Método que muestra la pantalla de modificacion cargando en esta todos los datos del modelo que se quiera modificar.
+	 */
 	public void editarModelo() {
 
 		if (table.getSelectedRow() == -1) {
@@ -347,6 +371,9 @@ public class JPConsulta2 extends JPanel {
 
 	}
 
+	/**
+	 * Método para borrar el modelo seleccionado de la tabla de la base de datos.
+	 */
 	public void borrarModelo() {
 		if (table.getSelectedRow() == -1) {
 			JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila de la tabla para borrar.");

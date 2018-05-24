@@ -12,6 +12,13 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase JDialog que genera la ventana about con los datos del programa.
+ * 
+ * @author David.Plaza
+ *
+ */
+
 public class JDAbout extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

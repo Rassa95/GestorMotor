@@ -11,8 +11,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * Clase TableModel que define como será la tabla de la pantalla Consulta.
+ * @author David.Plaza
+ *
+ */
 public class ModelosTableModel extends AbstractTableModel {
 
+	private static final int NUMERO_COLUMNAS = 4;
+	
 	ResultSet rs;
 	HashMap<String, ImageIcon> imagenes = new HashMap<String, ImageIcon>();
 
@@ -21,18 +28,22 @@ public class ModelosTableModel extends AbstractTableModel {
 
 	}
 
+	/**
+	 * Método que defineel número de columnas de la tabla.
+	 */
 	@Override
 	public int getColumnCount() {
 
-		return 4;
+		return NUMERO_COLUMNAS;
 	}
 
+	/**
+	 * Método que define el número de filas de la tabla.
+	 */
 	@Override
 	public int getRowCount() {
 
-		
-		 int contador;
-		 
+		int contador;
 
 		try {
 
@@ -49,6 +60,9 @@ public class ModelosTableModel extends AbstractTableModel {
 
 	}
 
+	/**
+	 * Método que define el contenido de cada celda de la tabla.
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
@@ -69,12 +83,12 @@ public class ModelosTableModel extends AbstractTableModel {
 				if (imagenes.containsKey(rs.getString("icono"))) {
 
 					return imagenes.get(rs.getString("icono"));
-					
+
 				} else {
 					try {
 
-						imagenes.put(rs.getString("icono"), new ImageIcon(ImageIO
-								.read(ModelosTableModel.class.getResourceAsStream("/img/ce/" + rs.getString("icono")))));
+						imagenes.put(rs.getString("icono"), new ImageIcon(ImageIO.read(
+								ModelosTableModel.class.getResourceAsStream("/img/ce/" + rs.getString("icono")))));
 						return imagenes.get(rs.getString("icono"));
 
 					} catch (IOException e) {
@@ -89,9 +103,12 @@ public class ModelosTableModel extends AbstractTableModel {
 		}
 
 		return "das";
-		
+
 	}
 
+	/**
+	 * Método que define los nombres de las columnas de la tabla.
+	 */
 	@Override
 	public String getColumnName(int column) {
 
@@ -106,6 +123,9 @@ public class ModelosTableModel extends AbstractTableModel {
 		return null;
 	}
 
+	/**
+	 * Método que define la clases de datos que va a tener cada columna.
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 
