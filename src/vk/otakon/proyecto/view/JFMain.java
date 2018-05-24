@@ -96,7 +96,10 @@ public class JFMain extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error de clase" + e1.getMessage());
 		} catch (SQLException e1) {
 
-			JOptionPane.showMessageDialog(null, "Se ha producido un error SQL: \n" + e1.getMessage());
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

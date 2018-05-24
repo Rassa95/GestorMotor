@@ -198,7 +198,11 @@ public class JPModificar extends JPanel {
 				JOptionPane.showMessageDialog(null,
 						"El modelo " + model.getModelo() + " ha sido modificado con éxito.");
 			} catch (SQLException e1) {
-				JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+				
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
@@ -212,8 +216,11 @@ public class JPModificar extends JPanel {
 			marcas = gb.cargarMarcas();
 			calificaciones = gb.cargarCalificaciones();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 
 		for (Marca marca : marcas) {

@@ -261,5 +261,7 @@ public class GestorBBDD {
 	public void cerrarConexion() throws SQLException {
 		conexion.close();
 	}
+	
+	
 
 }

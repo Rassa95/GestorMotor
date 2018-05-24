@@ -227,7 +227,11 @@ public class JPAlta extends JPanel {
 				gb.addModelo(model);
 				JOptionPane.showMessageDialog(null, "El modelo " + model.getModelo() + " ha sido añadido con éxito.");
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null, "Error SQL" + e.getMessage() + e.getErrorCode());
+				
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

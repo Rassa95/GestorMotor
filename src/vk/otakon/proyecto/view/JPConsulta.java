@@ -262,7 +262,10 @@ public class JPConsulta extends JPanel {
 			table.setModel(mtm);
 		} catch (SQLException e1) {
 
-			JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 
 		}
 
@@ -278,7 +281,10 @@ public class JPConsulta extends JPanel {
 				table.setModel(new ModelosTableModel(rs));
 			} catch (SQLException e1) {
 
-				JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 
 			}
 		} else if (bMarcas.isSelected()) {
@@ -290,7 +296,10 @@ public class JPConsulta extends JPanel {
 
 			} catch (SQLException e1) {
 
-				JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 
 			}
 
@@ -300,7 +309,10 @@ public class JPConsulta extends JPanel {
 				table.setModel(new ModelosTableModel(rs));
 			} catch (SQLException e1) {
 
-				JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 
 			}
 		} else if (bClasi.isSelected()) {
@@ -319,7 +331,10 @@ public class JPConsulta extends JPanel {
 				table.setModel(new ModelosTableModel(rs));
 			} catch (SQLException e1) {
 
-				JOptionPane.showMessageDialog(null, "Error SQL" + e1.getMessage() + e1.getErrorCode());
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 
 			}
 		} else {
@@ -388,8 +403,11 @@ public class JPConsulta extends JPanel {
 					table.setModel(new ModelosTableModel(rs));
 					JOptionPane.showMessageDialog(null, "Modelo eliminado con éxito.");
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					
+					JOptionPane.showMessageDialog(null,
+						    "Se ha producido un error de conexión con la base de datos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
