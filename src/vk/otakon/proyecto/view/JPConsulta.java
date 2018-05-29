@@ -378,8 +378,10 @@ public class JPConsulta extends JPanel {
 				principal.cambiarPantalla("pModificar");
 
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null,
+					    "Se ha producido un error de conexión con la base de datos.",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
 			}
 
 		}

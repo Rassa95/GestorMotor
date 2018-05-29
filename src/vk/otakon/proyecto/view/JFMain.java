@@ -12,8 +12,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.CardLayout;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -69,6 +74,16 @@ public class JFMain extends JFrame {
 			}
 		});
 		mnHelp.add(mntmAboutGestorMotor);
+		
+		JMenuItem mntmGuide = new JMenuItem("Guide");
+		mntmGuide.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				abrirAyuda();
+			}
+
+		});
+		mnHelp.add(mntmGuide);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -122,5 +137,21 @@ public class JFMain extends JFrame {
 		pConsulta.aplicarFiltro();
 		cambiarPantalla("pConsulta");
 
+	}
+	
+	
+	/**
+	 * Método que abre la ayuda del programa alojada en Google Drive.
+	 */
+	private void abrirAyuda() {
+		try {
+			URL url = new URL("https://drive.google.com/open?id=10dC36mV16tHrLyP1liqn9oza3d-cLfAKt7Txt2ReUqA");
+			Desktop.getDesktop().browse(url.toURI());
+		} catch (IOException | URISyntaxException e1) {
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error en el servidor de la ayuda.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

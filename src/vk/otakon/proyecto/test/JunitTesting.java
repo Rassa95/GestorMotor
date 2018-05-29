@@ -38,7 +38,6 @@ public class JunitTesting {
 	}
 	
 	
-	
 	public boolean delModelo() {
 		boolean encontrado = false;
 		boolean borrado = false;
@@ -46,8 +45,10 @@ public class JunitTesting {
 		try {
 
 			GestorBBDD gb = new GestorBBDD();
-		
+
 			Modelo model = new Modelo(5, "Modelo de prueba", 30, 500, "B");
+			
+			gb.addModelo(model);
 			
 			ResultSet rs= gb.consultarBBDD();
 			
@@ -65,21 +66,26 @@ public class JunitTesting {
 				
 				while(rs.next()) {
 					if (rs.getString("modelo").equalsIgnoreCase(model.getModelo())) {
+						gb.borrarFila(rs.getInt("id"));
 						borrado = true;
 						break;
 					}
 				}
 			}
 			
-			if (encontrado && borrado) {
-				return true;
+			if (encontrado) {
+				if (borrado) {
+					return true;
+				}
 			}else {
+				
 				return false;
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			return false;
 		}
+		return false;
 		
 	}
 }
