@@ -27,10 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.ImageIcon;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
+
 
 /**
  * Clase JPanel donde se realizan y muestran las consultas de los modelos.
@@ -43,8 +40,6 @@ public class JPConsulta extends JPanel {
 	protected GestorBBDD gb;
 	protected ResultSet rs;
 	protected JTable table;
-	private JFMain jfmain;
-
 	protected JComboBox<String> cbMarcas;
 	protected JComboBox<String> cbCalificacion;
 	protected JRadioButton bMarcas;
@@ -107,11 +102,11 @@ public class JPConsulta extends JPanel {
 		btnGroup.add(bEmisiones);
 		btnGroup.add(bClasi);
 
-		cbMarcas = new JComboBox();
+		cbMarcas = new JComboBox<String>();
 		cbMarcas.setBounds(647, 61, 231, 20);
 		panel.add(cbMarcas);
 
-		cbCalificacion = new JComboBox();
+		cbCalificacion = new JComboBox<String>();
 		cbCalificacion.setBounds(647, 20, 231, 20);
 		panel.add(cbCalificacion);
 
@@ -176,6 +171,8 @@ public class JPConsulta extends JPanel {
 		btnSubir.setIcon(new ImageIcon(JPAlta.class.getResource("/img/64/la-computacion-en-nube.png")));
 		toolBar.add(btnSubir);
 
+		
+		
 		btnSubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -201,14 +198,24 @@ public class JPConsulta extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				borrarModelo();
-				aplicarFiltro();
+				if (bClasi.isSelected()) {
+					aplicarFiltro();
+				} else  if(bConsumo.isSelected()){
+					aplicarFiltro();
+				}else  if(bEmisiones.isSelected() ){
+					aplicarFiltro();
+				}else  if(bMarcas.isSelected()){
+					aplicarFiltro();
+				}else {
+					buscarTodos();
+				}
 			}
 		});
 
 		cargarDatosFiltros();
 
 		// Peta y no deja editar si lo dejo puesto
-		// buscarTodos();
+		buscarTodos();
 	}
 
 	/**
@@ -238,8 +245,10 @@ public class JPConsulta extends JPanel {
 			marcas = gb.cargarMarcas();
 			calificaciones = gb.cargarCalificaciones();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 
 		for (Marca marca : marcas) {
@@ -260,6 +269,12 @@ public class JPConsulta extends JPanel {
 		try {
 			ModelosTableModel mtm = new ModelosTableModel(gb.consultarBBDD());
 			table.setModel(mtm);
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			table.getColumnModel().getColumn(0).setPreferredWidth(500);
+			table.getColumnModel().getColumn(1).setPreferredWidth(100);
+			table.getColumnModel().getColumn(2).setPreferredWidth(100);
+			table.getColumnModel().getColumn(3).setPreferredWidth(160);
+			
 		} catch (SQLException e1) {
 
 			JOptionPane.showMessageDialog(null,

@@ -117,8 +117,11 @@ public class ModelosTableModel extends AbstractTableModel {
 			String[] nombres = { rsmd.getColumnName(3), rsmd.getColumnName(4), rsmd.getColumnName(5),
 					rsmd.getColumnName(6) };
 			return nombres[column];
-		} catch (SQLException e) {// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 		return null;
 	}
@@ -133,4 +136,6 @@ public class ModelosTableModel extends AbstractTableModel {
 
 		return clases[columnIndex];
 	}
+	
+	
 }

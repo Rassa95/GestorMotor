@@ -184,8 +184,10 @@ public class JPAlta extends JPanel {
 			marcas = gb.cargarMarcas();
 			calificaciones = gb.cargarCalificaciones();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				    "Se ha producido un error de conexión con la base de datos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 
 		for (Marca marca : marcas) {
