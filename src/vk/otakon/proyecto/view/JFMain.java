@@ -21,6 +21,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 
 /**
@@ -44,6 +45,7 @@ public class JFMain extends JFrame {
 
 	public JFMain() {
 
+		
 		setTitle("Gestor Motor");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,6 +117,7 @@ public class JFMain extends JFrame {
 				    "Se ha producido un error de conexión con la base de datos.",
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
+			System.exit(1);
 		}
 	}
 
@@ -134,7 +137,17 @@ public class JFMain extends JFrame {
 	 */
 	protected void cambiarPantallaConsulta() {
 
-		pConsulta.aplicarFiltro();
+		if (pConsulta.bClasi.isSelected()) {
+			pConsulta.aplicarFiltro();
+		} else  if(pConsulta.bConsumo.isSelected()){
+			pConsulta.aplicarFiltro();
+		}else  if(pConsulta.bEmisiones.isSelected() ){
+			pConsulta.aplicarFiltro();
+		}else  if(pConsulta.bMarcas.isSelected()){
+			pConsulta.aplicarFiltro();
+		}else {
+			pConsulta.buscarTodos();
+		}
 		cambiarPantalla("pConsulta");
 
 	}

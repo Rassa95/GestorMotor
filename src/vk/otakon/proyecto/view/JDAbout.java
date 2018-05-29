@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 /**
  * Clase JDialog que genera la ventana about con los datos del programa.
@@ -40,6 +41,7 @@ public class JDAbout extends JDialog {
 	 * Create the dialog.
 	 */
 	public JDAbout() {
+		setTitle("About Gestor Motor");
 		setModal(true);
 		setBounds(100, 100, 285, 255);
 		getContentPane().setLayout(new BorderLayout());
