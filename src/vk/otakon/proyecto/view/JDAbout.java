@@ -41,6 +41,7 @@ public class JDAbout extends JDialog {
 	 * Create the dialog.
 	 */
 	public JDAbout() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JDAbout.class.getResource("/img/64/25-512.png")));
 		setTitle("About Gestor Motor");
 		setModal(true);
 		setBounds(100, 100, 285, 255);

@@ -28,7 +28,7 @@ public class GestorBBDD {
 	private Connection conexion;
 
 	/**
-	 * Funcion que hace una consulta de todos los modelos de la base de datos
+	 * Función que hace una consulta de los 100 primeros modelos de la base de datos
 	 * ordenandolos por nombre.
 	 * 
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
@@ -36,7 +36,32 @@ public class GestorBBDD {
 	 */
 	public ResultSet consultarBBDD() throws SQLException {
 
-		String sql = "select m.*, e.icono from modelos m, eficiencias e where m.c_energetica = e.c_energetica order by m.modelo";
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e "
+				+ "where m.c_energetica = e.c_energetica "
+				+ "order by m.modelo "
+				+ "limit 100";
+
+		Statement st = conexion.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+
+		return rs;
+
+	}
+	
+	/**
+	 * Función que solo se usa para realizar los tests que devuelve todos los modelos
+	 * de la base de datos.
+	 * 
+	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
+	 * @throws SQLException
+	 */
+	public ResultSet consultarBBDDTest() throws SQLException {
+
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e "
+				+ "where m.c_energetica = e.c_energetica "
+				+ "order by m.modelo ";
 
 		Statement st = conexion.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -54,8 +79,10 @@ public class GestorBBDD {
 	 */
 	public ResultSet filtrarBBDDconsumo(float consumo) throws SQLException {
 
-		String sql = "select m.*, e.icono from modelos m, eficiencias e where m.c_energetica = e.c_energetica and consumo <= "
-				+ consumo + " order by consumo desc";
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e "
+				+ "where m.c_energetica = e.c_energetica and consumo <= "+ consumo + " "
+				+ "order by consumo desc";
 
 		Statement st = conexion.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -73,8 +100,10 @@ public class GestorBBDD {
 	 */
 	public ResultSet filtrarBBDDmarca(int marca) throws SQLException {
 
-		String sql = "select m.*, e.icono from modelos m, eficiencias e where m.c_energetica = e.c_energetica and id_marca = "
-				+ marca + " order by m.modelo";
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e "
+				+ "where m.c_energetica = e.c_energetica and id_marca = "+ marca + " "
+				+ "order by m.modelo";
 
 		Statement st = conexion.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -92,8 +121,10 @@ public class GestorBBDD {
 	 */
 	public ResultSet filtrarBBDDemisiones(float emisiones) throws SQLException {
 
-		String sql = "select m.*, e.icono from modelos m, eficiencias e where m.c_energetica = e.c_energetica and emisiones <= "
-				+ emisiones + " order by emisiones desc";
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e "
+				+ "where m.c_energetica = e.c_energetica and emisiones <= "+ emisiones + " "
+				+ "order by emisiones desc";
 
 		Statement st = conexion.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -111,8 +142,10 @@ public class GestorBBDD {
 	 */
 	public ResultSet filtrarBBDDeficiencia(String cali) throws SQLException {
 
-		String sql = "select m.*, e.icono from modelos m, eficiencias e where m.c_energetica = e.c_energetica and m.c_energetica = '"
-				+ cali + "' order by m.c_energetica desc";
+		String sql = "select m.*, e.icono "
+				+ "from modelos m, eficiencias e"
+				+ " where m.c_energetica = e.c_energetica and m.c_energetica = '"+ cali + "' "
+				+ "order by m.c_energetica desc";
 
 		Statement st = conexion.createStatement();
 		ResultSet rs = st.executeQuery(sql);

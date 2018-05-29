@@ -44,6 +44,7 @@ public class JFMain extends JFrame {
 	 */
 
 	public JFMain() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JFMain.class.getResource("/img/64/car.png")));
 
 		
 		setTitle("Gestor Motor");

@@ -19,7 +19,7 @@ public class JunitTesting {
 			
 			gb.addModelo(model);
 			
-			ResultSet rs= gb.consultarBBDD();
+			ResultSet rs= gb.consultarBBDDTest();
 			
 			while(rs.next()) {
 				if (rs.getString("modelo").equalsIgnoreCase(model.getModelo())) {
@@ -50,7 +50,7 @@ public class JunitTesting {
 			
 			gb.addModelo(model);
 			
-			ResultSet rs= gb.consultarBBDD();
+			ResultSet rs= gb.consultarBBDDTest();
 			
 			while(rs.next()) {
 				if (rs.getString("modelo").equalsIgnoreCase(model.getModelo())) {
@@ -62,13 +62,13 @@ public class JunitTesting {
 			
 			if (encontrado) {
 				
-				rs= gb.consultarBBDD();
+				rs= gb.consultarBBDDTest();
 				
 				while(rs.next()) {
 					if (rs.getString("modelo").equalsIgnoreCase(model.getModelo())) {
 						gb.borrarFila(rs.getInt("id"));
 						borrado = true;
-						break;
+						
 					}
 				}
 			}
