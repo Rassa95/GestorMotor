@@ -55,7 +55,11 @@ public class JPConsulta extends JPanel {
 	protected JFMain principal;
 
 	/**
-	 * Create the panel.
+	 * Constructor del panel JPConsulta.
+	 * 
+	 * @param gb Gestor de la Base de datos.
+	 * @param principal JFrame principal que contriene el resto de JPanel.
+	 * @param jpModi JPanel JPModificar.
 	 */
 	public JPConsulta(GestorBBDD gb, JFMain principal, JPModificar jpModi) {
 
@@ -84,12 +88,12 @@ public class JPConsulta extends JPanel {
 		bMarcas.setBounds(468, 60, 109, 23);
 		panel.add(bMarcas);
 
-		bConsumo = new JRadioButton("Consumo m\u00E1ximo");
-		bConsumo.setBounds(16, 60, 131, 23);
+		bConsumo = new JRadioButton("Consumo m\u00E1ximo L/100 Km");
+		bConsumo.setBounds(0, 60, 186, 23);
 		panel.add(bConsumo);
 
-		bEmisiones = new JRadioButton("Emisiones m\u00E1ximas");
-		bEmisiones.setBounds(16, 19, 151, 23);
+		bEmisiones = new JRadioButton("Emisiones m\u00E1ximas gCO2/Km");
+		bEmisiones.setBounds(0, 19, 213, 23);
 		panel.add(bEmisiones);
 
 		bClasi = new JRadioButton("Clasificacion Energetica");
@@ -133,7 +137,7 @@ public class JPConsulta extends JPanel {
 				lbEmisiones.setText(f1.format(slEmisiones.getValue() * 0.1));
 			}
 		});
-		slEmisiones.setBounds(173, 16, 219, 26);
+		slEmisiones.setBounds(219, 16, 173, 26);
 		panel.add(slEmisiones);
 
 		JSlider slConsumo = new JSlider();
@@ -148,7 +152,7 @@ public class JPConsulta extends JPanel {
 				lbConsumo.setText(f1.format(slConsumo.getValue() * 0.1));
 			}
 		});
-		slConsumo.setBounds(173, 60, 219, 26);
+		slConsumo.setBounds(219, 60, 173, 26);
 		panel.add(slConsumo);
 
 		JButton btnBorrar = new JButton("");
@@ -270,11 +274,7 @@ public class JPConsulta extends JPanel {
 		
 			rs = gb.consultarBBDD();
 			table.setModel(new ModelosTableModel(rs));
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			table.getColumnModel().getColumn(0).setPreferredWidth(500);
-			table.getColumnModel().getColumn(1).setPreferredWidth(100);
-			table.getColumnModel().getColumn(2).setPreferredWidth(100);
-			table.getColumnModel().getColumn(3).setPreferredWidth(160);
+			aplicar_diseno();
 			
 		} catch (SQLException e1) {
 
@@ -295,11 +295,7 @@ public class JPConsulta extends JPanel {
 			try {
 				rs = gb.filtrarBBDDconsumo(Float.parseFloat(lbConsumo.getText()));
 				table.setModel(new ModelosTableModel(rs));
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.getColumnModel().getColumn(0).setPreferredWidth(500);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(160);
+				aplicar_diseno();
 			} catch (SQLException e1) {
 
 				JOptionPane.showMessageDialog(null,
@@ -314,11 +310,7 @@ public class JPConsulta extends JPanel {
 				int idMarca = marcas.get(cbMarcas.getSelectedIndex()).getId();
 				rs = gb.filtrarBBDDmarca(idMarca);
 				table.setModel(new ModelosTableModel(rs));
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.getColumnModel().getColumn(0).setPreferredWidth(500);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(160);
+				aplicar_diseno();
 			} catch (SQLException e1) {
 
 				JOptionPane.showMessageDialog(null,
@@ -332,11 +324,7 @@ public class JPConsulta extends JPanel {
 			try {
 				rs = gb.filtrarBBDDemisiones(Float.parseFloat(lbEmisiones.getText()));
 				table.setModel(new ModelosTableModel(rs));
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.getColumnModel().getColumn(0).setPreferredWidth(500);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(160);
+				aplicar_diseno();
 			} catch (SQLException e1) {
 
 				JOptionPane.showMessageDialog(null,
@@ -359,11 +347,8 @@ public class JPConsulta extends JPanel {
 
 				rs = gb.filtrarBBDDeficiencia(eficiencia);
 				table.setModel(new ModelosTableModel(rs));
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				table.getColumnModel().getColumn(0).setPreferredWidth(500);
-				table.getColumnModel().getColumn(1).setPreferredWidth(100);
-				table.getColumnModel().getColumn(2).setPreferredWidth(100);
-				table.getColumnModel().getColumn(3).setPreferredWidth(160);
+				
+				aplicar_diseno();
 			} catch (SQLException e1) {
 
 				JOptionPane.showMessageDialog(null,
@@ -377,6 +362,17 @@ public class JPConsulta extends JPanel {
 					"No tienes ningun filtro selecionado. Por favor, selecciona uno para aplicar un filtro.");
 		}
 
+	}
+
+	/**
+	 * Método que aplica el tamaño adecuado a cada columna de la tabla.
+	 */
+	private void aplicar_diseno() {
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(500);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setPreferredWidth(160);
 	}
 
 	/**
@@ -438,11 +434,7 @@ public class JPConsulta extends JPanel {
 					gb.borrarFila(rs.getInt("ID"));
 					// rs = gb.consultarBBDD();
 					table.setModel(new ModelosTableModel(rs));
-					table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					table.getColumnModel().getColumn(0).setPreferredWidth(500);
-					table.getColumnModel().getColumn(1).setPreferredWidth(100);
-					table.getColumnModel().getColumn(2).setPreferredWidth(100);
-					table.getColumnModel().getColumn(3).setPreferredWidth(160);
+					aplicar_diseno();
 					JOptionPane.showMessageDialog(null, "Modelo eliminado con éxito.");
 				} catch (SQLException e1) {
 					

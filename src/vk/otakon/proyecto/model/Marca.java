@@ -11,6 +11,12 @@ public class Marca {
 	private String nombre;
 	private int id;
 
+	/**
+	 * Constructor de Marca.
+	 * 
+	 * @param nombre Nombre de la marca.
+	 * @param id Número identificativo de la marca.
+	 */
 	public Marca(String nombre, int id) {
 		this.nombre = nombre;
 		this.id = id;

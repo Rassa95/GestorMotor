@@ -23,6 +23,11 @@ public class ModelosTableModel extends AbstractTableModel {
 	ResultSet rs;
 	HashMap<String, ImageIcon> imagenes = new HashMap<String, ImageIcon>();
 
+	/**
+	 * Constructor de ModelosTableModel
+	 * 
+	 * @param rs ResulSet con la información de la consulta.
+	 */
 	public ModelosTableModel(ResultSet rs) {
 		this.rs = rs;
 

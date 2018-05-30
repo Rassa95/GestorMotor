@@ -38,7 +38,7 @@ public class JDAbout extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * Constructor de la ventana JDAbout.
 	 */
 	public JDAbout() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JDAbout.class.getResource("/img/64/25-512.png")));

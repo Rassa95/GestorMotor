@@ -18,12 +18,12 @@ public class Modelo {
 	/**
 	 * Constructor de modelo incluyendo el id.
 	 * 
-	 * @param id
-	 * @param id_marca
-	 * @param modelo
-	 * @param consumo
-	 * @param emisiones
-	 * @param calificacionE
+	 * @param id Número identificativo del modelo
+	 * @param id_marca Número identificativo de la marca.
+	 * @param modelo Nombre del modelo.
+	 * @param consumo Consumo del modelo.
+	 * @param emisiones Emisiones del modelo.
+	 * @param calificacionE Calificacion Energetica del modelo.
 	 */
 	public Modelo(int id, int id_marca, String modelo, float consumo, float emisiones, String calificacionE) {
 
@@ -39,11 +39,11 @@ public class Modelo {
 	/**
 	 * Constructor de modelo sin incluir el id.
 	 * 
-	 * @param id_marca
-	 * @param modelo
-	 * @param consumo
-	 * @param emisiones
-	 * @param calificacionE
+	 * @param id_marca Número identificativo de la marca.
+	 * @param modelo Nombre del modelo.
+	 * @param consumo Consumo del modelo.
+	 * @param emisiones Emisiones del modelo.
+	 * @param calificacionE Calificacion Energetica del modelo.
 	 */
 	public Modelo(int id_marca, String modelo, float consumo, float emisiones, String calificacionE) {
 
@@ -55,7 +55,7 @@ public class Modelo {
 	}
 
 	/**
-	 * Construcctor vacio del modelo.
+	 * Constructor vacio del modelo.
 	 */
 	public Modelo() {
 

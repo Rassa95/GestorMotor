@@ -12,6 +12,13 @@ public class CalificacionEnergetica {
 	private String descripcion;
 	private String icono;
 
+	/**
+	 * Contructor de calificacion energetica.
+	 * 
+	 * @param calificacion Calificacion energetica.
+	 * @param descripcion Descripción de la calificacion.
+	 * @param icono	Nombre del archivo con la imagen de la calificación.
+	 */
 	public CalificacionEnergetica(String calificacion, String descripcion, String icono) {
 
 		this.calificacion = calificacion;

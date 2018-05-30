@@ -25,7 +25,7 @@ import java.awt.Toolkit;
 
 
 /**
- * Clase JFFrame principal que carga en el todos los JPanel del proyecto.
+ * Clase JFFrame principal que carga en él todos los JPanel del proyecto.
  * 
  * @author David.Plaza
  *
@@ -40,7 +40,7 @@ public class JFMain extends JFrame {
 	protected GestorBBDD gb;
 
 	/**
-	 * Create the frame.
+	 * Constructor del JFMain.
 	 */
 
 	public JFMain() {

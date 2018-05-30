@@ -21,10 +21,17 @@ import java.sql.Statement;
  */
 public class GestorBBDD {
 
-	private final static String DRIVER = "com.mysql.jdbc.Driver";
-	private final static String BBDD = "jdbc:mysql://localhost/bbdd_gestmotor";
-	private final static String USER = "dam2018";
-	private final static String PASSWORD = "dam2018";
+	
+	private static final String BBDD_PASSWORD = "dam2018";
+	private static final String BBDD_USER = "dam2018";
+	private static final String BBDD_URL = "jdbc:mysql://localhost/bbdd_gestmotor";
+	private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+	
+	
+	private final static String DRIVER = DRIVER_NAME;
+	private final static String BBDD = BBDD_URL;
+	private final static String USER = BBDD_USER;
+	private final static String PASSWORD = BBDD_PASSWORD;
 	private Connection conexion;
 
 	/**
@@ -32,7 +39,7 @@ public class GestorBBDD {
 	 * ordenandolos por nombre.
 	 * 
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet consultarBBDD() throws SQLException {
 		
@@ -57,7 +64,7 @@ public class GestorBBDD {
 	 * de la base de datos.
 	 * 
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet consultarBBDDTest() throws SQLException {
 		
@@ -81,7 +88,7 @@ public class GestorBBDD {
 	 * 
 	 * @param consumo por el que se va a filtrar.
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet filtrarBBDDconsumo(float consumo) throws SQLException {
 		
@@ -105,7 +112,7 @@ public class GestorBBDD {
 	 * 
 	 * @param marca por la que se va a filtrar.
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet filtrarBBDDmarca(int marca) throws SQLException {
 		
@@ -129,7 +136,7 @@ public class GestorBBDD {
 	 * 
 	 * @param emisiones por las que se van a filtrar.
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet filtrarBBDDemisiones(float emisiones) throws SQLException {
 		
@@ -153,7 +160,7 @@ public class GestorBBDD {
 	 * 
 	 * @param eficiencia por la que se va a filtrar.
 	 * @return Devuelve un ResulSet con toda la informacion de la consulta.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ResultSet filtrarBBDDeficiencia(String cali) throws SQLException {
 		
@@ -176,7 +183,7 @@ public class GestorBBDD {
 	 * Funcion que añade un modelo a la base de datos.
 	 * 
 	 * @param Objeto modelo que se va a añadir.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public void addModelo(Modelo model) throws SQLException {
 
@@ -202,7 +209,7 @@ public class GestorBBDD {
 	 * Función que borra un modelo de la base de datos.
 	 * 
 	 * @param id por el que buscamos el modelo a borrar
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public void borrarFila(int id) throws SQLException {
 		
@@ -219,7 +226,7 @@ public class GestorBBDD {
 	 * Funcion que modifica los parametros de un modelo de la base de datos.
 	 * 
 	 * @param modelocon la informacion actualizada que vamos a meter en la base de datos.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public void modificarModelo(Modelo model) throws SQLException {
 
@@ -245,7 +252,7 @@ public class GestorBBDD {
 	 * Funcion para cargar en memoria todas las marcas de la base de datos.
 	 * 
 	 * @return Devuelve un ArrayList de marcas.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ArrayList<Marca> cargarMarcas() throws SQLException {
 		
@@ -271,7 +278,7 @@ public class GestorBBDD {
 	 * base de datos.
 	 * 
 	 * @return Devuelve un ArrayList de calificaciones.
-	 * @throws SQLException
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public ArrayList<CalificacionEnergetica> cargarCalificaciones() throws SQLException {
 		
@@ -296,8 +303,8 @@ public class GestorBBDD {
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
+	 * @throws ClassNotFoundException Excepción producida por no encontrar la clase solicitada.
+	 * @throws SQLException Excepción producida por un error en la conexión.
 	 */
 	public GestorBBDD() throws ClassNotFoundException, SQLException {
 		Class.forName(DRIVER);

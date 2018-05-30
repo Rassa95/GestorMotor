@@ -49,7 +49,11 @@ public class JPModificar extends JPanel {
 	protected JPConsulta search;
 
 	/**
-	 * Create the panel.
+	 * Constructor del panel JPanel JPModificar.
+	 * 
+	 * @param busqueda Panel JPConsulta.
+	 * @param gb Gestor de la base da datos.
+	 * @param principal JFrame principal que contiene al resto de JPanel.
 	 */
 	public JPModificar(JPConsulta busqueda, GestorBBDD gb, JFMain principal) {
 		this.gb = gb;
@@ -83,13 +87,13 @@ public class JPModificar extends JPanel {
 		label_1.setBounds(178, 202, 78, 14);
 		panel.add(label_1);
 
-		JLabel label_2 = new JLabel("Consumo");
-		label_2.setBounds(178, 271, 78, 14);
-		panel.add(label_2);
+		JLabel lblConsumoLKm = new JLabel("Consumo  L/100 Km");
+		lblConsumoLKm.setBounds(178, 271, 161, 14);
+		panel.add(lblConsumoLKm);
 
-		JLabel label_3 = new JLabel("Emisiones");
-		label_3.setBounds(178, 343, 78, 14);
-		panel.add(label_3);
+		JLabel lblEmisionesGcokm = new JLabel("Emisiones gCO2/Km");
+		lblEmisionesGcokm.setBounds(178, 343, 161, 14);
+		panel.add(lblEmisionesGcokm);
 
 		JLabel label_4 = new JLabel("Calificacion Energetica ");
 		label_4.setBounds(178, 416, 150, 14);
@@ -244,7 +248,7 @@ public class JPModificar extends JPanel {
 	/**
 	 * Método que pregunta al usuario si está seguro de querer modificar el modelo con dichos datos.
 	 * 
-	 * @param modelo
+	 * @param modelo nombre del modelo del que se quiere aplicar las modifcaciones.
 	 * @return boolean con la confirmación o negación.
 	 */
 	public boolean getConfirmacion(String modelo) {

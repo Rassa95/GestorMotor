@@ -55,7 +55,10 @@ public class JPAlta extends JPanel {
 	private ArrayList<CalificacionEnergetica> calificaciones;
 
 	/**
-	 * Create the panel.
+	 * Constructor del panel JPAlta.
+	 * 
+	 * @param gb Gestor de la base de datos.
+	 * @param principal JFrame principal contenedor de todos los JPanel.
 	 */
 
 	public JPAlta(GestorBBDD gb, JFMain principal) {
@@ -98,13 +101,13 @@ public class JPAlta extends JPanel {
 		label.setBounds(189, 203, 78, 14);
 		panel.add(label);
 
-		JLabel label_1 = new JLabel("Consumo");
-		label_1.setBounds(189, 272, 78, 14);
-		panel.add(label_1);
+		JLabel lblConsumoLKm = new JLabel("Consumo  L/100 Km");
+		lblConsumoLKm.setBounds(189, 272, 150, 14);
+		panel.add(lblConsumoLKm);
 
-		JLabel label_2 = new JLabel("Emisiones");
-		label_2.setBounds(189, 344, 78, 14);
-		panel.add(label_2);
+		JLabel lblEmisionesGcokm = new JLabel("Emisiones gCO2/Km");
+		lblEmisionesGcokm.setBounds(189, 344, 150, 14);
+		panel.add(lblEmisionesGcokm);
 
 		JLabel label_3 = new JLabel("Marca");
 		label_3.setBounds(189, 140, 79, 14);
@@ -252,7 +255,7 @@ public class JPAlta extends JPanel {
 	
 	/**
 	 * Método que pregunta al usuario si está seguro de querer subir un modelo.
-	 * @param modelo
+	 * @param modelo nombre del modelo que se quiere confirmar.
 	 * @return boolean con la confirmación o negación.
 	 */
 	public boolean getConfirmacion(String modelo) {
