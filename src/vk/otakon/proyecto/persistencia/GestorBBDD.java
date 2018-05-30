@@ -35,6 +35,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet consultarBBDD() throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e "
@@ -57,6 +60,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet consultarBBDDTest() throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e "
@@ -78,6 +84,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet filtrarBBDDconsumo(float consumo) throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e "
@@ -99,6 +108,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet filtrarBBDDmarca(int marca) throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e "
@@ -120,6 +132,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet filtrarBBDDemisiones(float emisiones) throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e "
@@ -141,6 +156,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ResultSet filtrarBBDDeficiencia(String cali) throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select m.*, e.icono "
 				+ "from modelos m, eficiencias e"
@@ -187,6 +205,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public void borrarFila(int id) throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "DELETE FROM modelos WHERE id = " + id + ";";
 
@@ -227,6 +248,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ArrayList<Marca> cargarMarcas() throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select * from marcas";
 		Statement st = conexion.createStatement();
@@ -250,6 +274,9 @@ public class GestorBBDD {
 	 * @throws SQLException
 	 */
 	public ArrayList<CalificacionEnergetica> cargarCalificaciones() throws SQLException {
+		
+		if (conexion.isClosed())
+			cargarConexion();
 
 		String sql = "select * from eficiencias";
 		Statement st = conexion.createStatement();

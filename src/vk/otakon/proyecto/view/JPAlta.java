@@ -32,6 +32,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 /**
  * Clase JPanel que permite crear un nuevo modelo y añadirlo a la base de datos.
@@ -76,42 +77,45 @@ public class JPAlta extends JPanel {
 		btnBuscar.setIcon(new ImageIcon(JPAlta.class.getResource("/img/64/zoom.png")));
 		toolBar.add(btnBuscar);
 		toolBar.add(btnGuardar);
+		
+		JLabel label_4 = new JLabel("");
+		toolBar.add(label_4);
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
 		cbMarcas = new JComboBox();
-		cbMarcas.setBounds(371, 65, 268, 20);
+		cbMarcas.setBounds(371, 137, 268, 20);
 		panel.add(cbMarcas);
 
 		tfModelo = new JTextField();
 		tfModelo.setColumns(10);
-		tfModelo.setBounds(371, 128, 268, 20);
+		tfModelo.setBounds(371, 200, 268, 20);
 		panel.add(tfModelo);
 
 		JLabel label = new JLabel("Modelo");
-		label.setBounds(189, 131, 78, 14);
+		label.setBounds(189, 203, 78, 14);
 		panel.add(label);
 
 		JLabel label_1 = new JLabel("Consumo");
-		label_1.setBounds(189, 200, 78, 14);
+		label_1.setBounds(189, 272, 78, 14);
 		panel.add(label_1);
 
 		JLabel label_2 = new JLabel("Emisiones");
-		label_2.setBounds(189, 272, 78, 14);
+		label_2.setBounds(189, 344, 78, 14);
 		panel.add(label_2);
 
 		JLabel label_3 = new JLabel("Marca");
-		label_3.setBounds(189, 68, 79, 14);
+		label_3.setBounds(189, 140, 79, 14);
 		panel.add(label_3);
 
 		cbCalificacion = new JComboBox();
-		cbCalificacion.setBounds(371, 342, 268, 20);
+		cbCalificacion.setBounds(371, 414, 268, 20);
 		panel.add(cbCalificacion);
 
 		JLabel lblCalificacion = new JLabel("Calificacion Energetica ");
-		lblCalificacion.setBounds(189, 345, 150, 14);
+		lblCalificacion.setBounds(189, 417, 150, 14);
 		panel.add(lblCalificacion);
 
 		JSlider slConsumo = new JSlider();
@@ -120,7 +124,7 @@ public class JPAlta extends JPanel {
 		slConsumo.setMajorTickSpacing(50);
 		slConsumo.setPaintTicks(true);
 		slConsumo.setMaximum(250);
-		slConsumo.setBounds(371, 189, 268, 23);
+		slConsumo.setBounds(371, 261, 268, 23);
 		panel.add(slConsumo);
 
 		JSlider slEmision = new JSlider();
@@ -130,18 +134,23 @@ public class JPAlta extends JPanel {
 		slEmision.setBorder(null);
 		slEmision.setMajorTickSpacing(1000);
 		slEmision.setMaximum(5000);
-		slEmision.setBounds(371, 272, 262, 23);
+		slEmision.setBounds(371, 344, 262, 23);
 		panel.add(slEmision);
 
 		lbConsumo = new JLabel("");
-		lbConsumo.setBounds(648, 200, 46, 14);
+		lbConsumo.setBounds(648, 272, 46, 14);
 		panel.add(lbConsumo);
 		lbConsumo.setText("0.0");
 
 		lbEmisiones = new JLabel("");
-		lbEmisiones.setBounds(648, 272, 46, 14);
+		lbEmisiones.setBounds(648, 344, 46, 14);
 		panel.add(lbEmisiones);
 		lbEmisiones.setText("0.0");
+		
+		JLabel lblAgregacinDeNuevo = new JLabel("Agregaci\u00F3n de nuevo modelo");
+		lblAgregacinDeNuevo.setFont(new Font("Sitka Small", Font.BOLD, 22));
+		lblAgregacinDeNuevo.setBounds(246, 41, 371, 30);
+		panel.add(lblAgregacinDeNuevo);
 
 		slConsumo.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -225,16 +234,37 @@ public class JPAlta extends JPanel {
 		if (modelo.trim().equalsIgnoreCase("")) {
 			JOptionPane.showMessageDialog(null, "El campo \"Modelo\" debe estar relleno. Inténtelo de nuevo.");
 		} else {
-			try {
-				gb.addModelo(model);
-				JOptionPane.showMessageDialog(null, "El modelo " + model.getModelo() + " ha sido añadido con éxito.");
-			} catch (SQLException e) {
+			if (getConfirmacion(model.getModelo())) {
 				
-				JOptionPane.showMessageDialog(null,
-					    "Se ha producido un error de conexión con la base de datos.",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
+				try {
+					gb.addModelo(model);
+					JOptionPane.showMessageDialog(null, "El modelo " + model.getModelo() + " ha sido añadido con éxito.");
+				} catch (SQLException e) {
+					
+					JOptionPane.showMessageDialog(null,
+						    "Se ha producido un error de conexión con la base de datos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
+	
+	/**
+	 * Método que pregunta al usuario si está seguro de querer subir un modelo.
+	 * @param modelo
+	 * @return boolean con la confirmación o negación.
+	 */
+	public boolean getConfirmacion(String modelo) {
+
+		int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro guardar el modelo " + modelo + " con estos datos?", "Gestormotor",
+				JOptionPane.YES_NO_OPTION);
+
+		if (respuesta == JOptionPane.OK_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
+

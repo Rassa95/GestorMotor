@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.Font;
 
 /**
  * Clase JPanel da la funcionalidad de modificar un modelo de la base de datos.
@@ -75,27 +76,27 @@ public class JPModificar extends JPanel {
 		panel.setLayout(null);
 
 		JLabel label = new JLabel("Marca");
-		label.setBounds(147, 109, 79, 14);
+		label.setBounds(178, 139, 79, 14);
 		panel.add(label);
 
 		JLabel label_1 = new JLabel("Modelo");
-		label_1.setBounds(147, 172, 78, 14);
+		label_1.setBounds(178, 202, 78, 14);
 		panel.add(label_1);
 
 		JLabel label_2 = new JLabel("Consumo");
-		label_2.setBounds(147, 241, 78, 14);
+		label_2.setBounds(178, 271, 78, 14);
 		panel.add(label_2);
 
 		JLabel label_3 = new JLabel("Emisiones");
-		label_3.setBounds(147, 313, 78, 14);
+		label_3.setBounds(178, 343, 78, 14);
 		panel.add(label_3);
 
 		JLabel label_4 = new JLabel("Calificacion Energetica ");
-		label_4.setBounds(147, 386, 150, 14);
+		label_4.setBounds(178, 416, 150, 14);
 		panel.add(label_4);
 
 		cbCalificacion = new JComboBox();
-		cbCalificacion.setBounds(329, 383, 268, 20);
+		cbCalificacion.setBounds(360, 413, 295, 20);
 		panel.add(cbCalificacion);
 
 		slEmisiones = new JSlider();
@@ -105,7 +106,7 @@ public class JPModificar extends JPanel {
 		slEmisiones.setMaximum(5000);
 		slEmisiones.setMajorTickSpacing(1000);
 		slEmisiones.setBorder(null);
-		slEmisiones.setBounds(329, 313, 262, 23);
+		slEmisiones.setBounds(360, 343, 295, 23);
 		panel.add(slEmisiones);
 
 		slConsumo = new JSlider();
@@ -114,25 +115,30 @@ public class JPModificar extends JPanel {
 		slConsumo.setMinorTickSpacing(25);
 		slConsumo.setMaximum(250);
 		slConsumo.setMajorTickSpacing(50);
-		slConsumo.setBounds(329, 230, 268, 23);
+		slConsumo.setBounds(360, 260, 295, 23);
 		panel.add(slConsumo);
 
 		tfModelo = new JTextField();
 		tfModelo.setColumns(10);
-		tfModelo.setBounds(329, 169, 268, 20);
+		tfModelo.setBounds(360, 199, 295, 20);
 		panel.add(tfModelo);
 
 		cbMarcas = new JComboBox();
-		cbMarcas.setBounds(329, 106, 268, 20);
+		cbMarcas.setBounds(360, 136, 295, 20);
 		panel.add(cbMarcas);
 
 		lbConsumo = new JLabel("0.0");
-		lbConsumo.setBounds(606, 241, 46, 14);
+		lbConsumo.setBounds(665, 271, 46, 14);
 		panel.add(lbConsumo);
 
 		lbEmisiones = new JLabel("0.0");
-		lbEmisiones.setBounds(606, 313, 46, 14);
+		lbEmisiones.setBounds(665, 343, 46, 14);
 		panel.add(lbEmisiones);
+		
+		JLabel lblModificacinDeModelo = new JLabel("Modificaci\u00F3n de modelo");
+		lblModificacinDeModelo.setFont(new Font("Sitka Small", Font.BOLD, 22));
+		lblModificacinDeModelo.setBounds(284, 32, 371, 30);
+		panel.add(lblModificacinDeModelo);
 
 		slEmisiones.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
@@ -174,36 +180,38 @@ public class JPModificar extends JPanel {
 		if (tfModelo.getText().trim().equalsIgnoreCase("")) {
 			JOptionPane.showMessageDialog(null, "El campo \"Modelo\" debe estar relleno. Inténtelo de nuevo.");
 		} else {
-			try {
-				int posicion = cbMarcas.getSelectedIndex();
-
-				model.setId_marca(marcas.get(posicion).getId());
-
-				model.setModelo(tfModelo.getText());
-
-				model.setConsumo(Float.parseFloat(lbConsumo.getText()));
-
-				model.setEmisiones(Float.parseFloat(lbEmisiones.getText()));
-
-				String eficiencia = cbCalificacion.getSelectedItem().toString();
-
-				if (cbCalificacion.getSelectedIndex() < 7) {
-					model.setCalificacionE(eficiencia.substring(eficiencia.length() - 1));
-				} else {
-
-					model.setCalificacionE(eficiencia.substring(eficiencia.length() - 2, eficiencia.length()));
+			if(getConfirmacion(tfModelo.getText())) {
+				try {
+					int posicion = cbMarcas.getSelectedIndex();
+	
+					model.setId_marca(marcas.get(posicion).getId());
+	
+					model.setModelo(tfModelo.getText());
+	
+					model.setConsumo(Float.parseFloat(lbConsumo.getText()));
+	
+					model.setEmisiones(Float.parseFloat(lbEmisiones.getText()));
+	
+					String eficiencia = cbCalificacion.getSelectedItem().toString();
+	
+					if (cbCalificacion.getSelectedIndex() < 7) {
+						model.setCalificacionE(eficiencia.substring(eficiencia.length() - 1));
+					} else {
+	
+						model.setCalificacionE(eficiencia.substring(eficiencia.length() - 2, eficiencia.length()));
+					}
+	
+					gb.modificarModelo(model);
+					JOptionPane.showMessageDialog(null,
+							"El modelo " + model.getModelo() + " ha sido modificado con éxito.");
+				} catch (SQLException e1) {
+					
+					JOptionPane.showMessageDialog(null,
+						    "Se ha producido un error de conexión con la base de datos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
-
-				gb.modificarModelo(model);
-				JOptionPane.showMessageDialog(null,
-						"El modelo " + model.getModelo() + " ha sido modificado con éxito.");
-			} catch (SQLException e1) {
-				
-				JOptionPane.showMessageDialog(null,
-					    "Se ha producido un error de conexión con la base de datos.",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-			}
+			} 
 		}
 
 	}
@@ -231,5 +239,23 @@ public class JPModificar extends JPanel {
 			cbCalificacion.addItem(calificacion.getDescripcion());
 		}
 
+	}
+	
+	/**
+	 * Método que pregunta al usuario si está seguro de querer modificar el modelo con dichos datos.
+	 * 
+	 * @param modelo
+	 * @return boolean con la confirmación o negación.
+	 */
+	public boolean getConfirmacion(String modelo) {
+
+		int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de querer aplicar los cambios del modelo " + modelo + "?", "Gestormotor",
+				JOptionPane.YES_NO_OPTION);
+
+		if (respuesta == JOptionPane.OK_OPTION) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
